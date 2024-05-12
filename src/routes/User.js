@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const controllers = require("./../controllers/UserControllers");
 
-router.get("/", (req, res) => {
-    return res.json("Welcome to from user api");
-  });
+router.get("/", controllers.get);
 
 module.exports = router;

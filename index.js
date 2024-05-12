@@ -3,24 +3,14 @@ const mysql = require("mysql");
 const cors = require("cors");
 const app = express();
 
-
 const userRouter = require("./src/routes/User");
 
-
-
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use(cors());
 app.use(express.json());
 
 async function main() {
   try {
-    const db = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "event_guchai",
-    });
-
     app.get("/", (req, res) => {
       return res.json("Welcome to the event_guchai API");
     });
