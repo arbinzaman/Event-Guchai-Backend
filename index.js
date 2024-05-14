@@ -5,10 +5,13 @@ const app = express();
 
 const userRouter = require("./src/routes/User");
 
-app.use("/users", userRouter);
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
-
+app.use("/users", userRouter);
 async function main() {
   try {
     app.get("/", (req, res) => {
