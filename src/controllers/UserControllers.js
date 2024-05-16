@@ -1,6 +1,6 @@
 const { get } = require("../routes/User");
-
 const connection = require("../config/dbConfig");
+
 handleGetALlUsers = async (req, res) => {
   connection.query("SELECT * FROM users", (error, results) => {
     if (error) {
@@ -12,38 +12,49 @@ handleGetALlUsers = async (req, res) => {
 
 handleGetUserById = async (req, res) => {
   const id = req.params.id;
-  connection.query("SELECT * FROM users WHERE id = ?", id, (error, results) => {
-    if (error) {
-      throw error;
+  connection.query(
+    "SELECT * FROM users WHERE userID = ?",
+    id,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results);
     }
-    res.status(200).json(results);
-  });
+  );
 };
 
 handleCheckAdminByEmail = async (req, res) => {
   try {
     const email = req.params.email;
+    // console.log(email);
     const query = "SELECT role FROM users WHERE email = ?";
-    const [results] = await connection.query(query, email);
-    console.log(results);
-
-    if (!results || results.length === 0) {
-      res.json({ isAdmin: false });
-    } else {
-      res.json({ isAdmin: results[0].role === "admin" });
-    }
+    connection.query(query, email, (error, results) => {
+      // console.log(results);
+      if (error) {
+        console.error("Error: " + error);
+        res.status(500).json({ error: "Internal server error" });
+      } else {
+        if (!results || results.length === 0) {
+          res.json({ isAdmin: false });
+        } else {
+          res.json({ isAdmin: results[0].role === "admin" });
+        }
+      }
+    });
   } catch (error) {
     console.error("Error: " + error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-handleMakeAdmin = async (req, res) => {
+handleRegisterUser = async (req, res) => {
   const sql =
-    "INSERT INTO users (userName,role,address,phone,email,password) VALUES (?)";
+    "INSERT INTO users (userName,role,vendorRole,address,phone,email,password) VALUES (?)";
   const values = [
     req.body.userName,
     req.body.role,
+    req.body.vendorRole,
     req.body.address,
     req.body.phone,
     req.body.email,
@@ -56,16 +67,51 @@ handleMakeAdmin = async (req, res) => {
   });
 };
 
+handleMakeAdmin = (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const newRole = "admin";
+  const updateQuery = "UPDATE users SET role = ? WHERE userID = ?";
+  connection.query(updateQuery, [newRole, id], (err, result) => {
+    if (err) {
+      console.error("Error updating user role:", err);
+      res.status(500).json({ error: "Failed to update user role" });
+      return;
+    }
+    console.log("User role updated to admin");
+    res.json({ message: "User role updated to admin" });
+  });
+};
+handleMakeVendor = (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const newRole = "vendor";
+  const updateQuery = "UPDATE users SET role = ? WHERE userID = ?";
+  connection.query(updateQuery, [newRole, id], (err, result) => {
+    if (err) {
+      console.error("Error updating user role:", err);
+      res.status(500).json({ error: "Failed to update user role" });
+      return;
+    }
+    console.log("User role updated to admin");
+    res.json({ message: "User role updated to admin" });
+  });
+};
+
 handleDeleteUser = async (req, res) => {
   const id = req.params.id;
-  connection.query("DELETE FROM users WHERE id = ?", id, (error, results) => {
-    if (error) {
-      console.error("Error deleting from the database: " + error);
-      res.status(500).json({ error: "Error deleting data" });
-    } else {
-      res.json({ message: "User deleted successful" });
+  connection.query(
+    "DELETE FROM users WHERE userID = ?",
+    id,
+    (error, results) => {
+      if (error) {
+        console.error("Error deleting from the database: " + error);
+        res.status(500).json({ error: "Error deleting data" });
+      } else {
+        res.json({ message: "User deleted successful" });
+      }
     }
-  });
+  );
 };
 
 module.exports = {
@@ -74,4 +120,5 @@ module.exports = {
   handleCheckAdminByEmail,
   handleMakeAdmin,
   handleDeleteUser,
+  handleRegisterUser,
 };
