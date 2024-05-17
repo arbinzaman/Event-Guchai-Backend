@@ -31,21 +31,53 @@ handleBookEvent = async (req, res) => {
   });
 };
 
-
-
-handleDeleteDataFromDb = async (req, res) => {
-  const bookingID = req.params.bookingID; 
+handleDeleteSoundSystemDataFromDb = async (req, res) => {
+  const bookingID = req.params.bookingID;
   const sql = "UPDATE bookevent SET sound_system = NULL WHERE bookingID = ?";
 
   connection.query(sql, [bookingID], (err, result) => {
     if (err) {
       console.error("Error deleting sound_system data:", err);
-      return res.status(500).json({ error: "Failed to delete sound_system data" });
+      return res
+        .status(500)
+        .json({ error: "Failed to delete sound_system data" });
     }
-    return res.status(200).json({ message: "Sound_system data deleted successfully" });
+    return res
+      .status(200)
+      .json({ message: "Sound_system data deleted successfully" });
+  });
+};
+handleDeleteCateringDataFromDb = async (req, res) => {
+  const bookingID = req.params.bookingID;
+  const sql = "UPDATE bookevent SET food = NULL WHERE bookingID = ?";
+
+  connection.query(sql, [bookingID], (err, result) => {
+    if (err) {
+      console.error("Error deleting catering data:", err);
+      return res.status(500).json({ error: "Failed to delete catering data" });
+    }
+    return res
+      .status(200)
+      .json({ message: "catering data deleted successfully" });
   });
 };
 
+handleDeleteDecoratorDataFromDb = async (req, res) => {
+  const bookingID = req.params.bookingID;
+  const sql = "UPDATE bookevent SET decoration = NULL WHERE bookingID = ?";
+
+  connection.query(sql, [bookingID], (err, result) => {
+    if (err) {
+      console.error("Error deleting decoration data:", err);
+      return res
+        .status(500)
+        .json({ error: "Failed to delete decoration data" });
+    }
+    return res
+      .status(200)
+      .json({ message: "decoration data deleted successfully" });
+  });
+};
 
 handleGetUserByEmail = async (req, res) => {
   const email = req.params.email;
@@ -65,6 +97,8 @@ handleGetUserByEmail = async (req, res) => {
 module.exports = {
   handleAllBookings,
   handleBookEvent,
-  handleDeleteDataFromDb,
   handleGetUserByEmail,
+  handleDeleteSoundSystemDataFromDb,
+  handleDeleteDecoratorDataFromDb,
+  handleDeleteCateringDataFromDb,
 };

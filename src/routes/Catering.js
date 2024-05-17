@@ -11,6 +11,6 @@ router.get("/", handleAllCatering);
 
 router.post("/", handleBookCateringService);
 
-router.put("/:decorationID", handleUpdateStatus);
+router.put("/:cateringID", handleUpdateStatus);
 
 module.exports = router;

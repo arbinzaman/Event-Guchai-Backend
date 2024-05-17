@@ -1,10 +1,10 @@
-const { get } = require("../routes/Catering");
+const { get } = require("../routes/Media");
 const connection = require("../config/dbConfig");
 
 
 
-handleAllCatering = async (req, res) => {
-    connection.query("SELECT * FROM catering", (error, results) => {
+handleAllMedia = async (req, res) => {
+    connection.query("SELECT * FROM media", (error, results) => {
     if (error) {
         throw error;
     }
@@ -14,7 +14,7 @@ handleAllCatering = async (req, res) => {
 
 
 
-handleBookCateringService = async (req, res) => {
+handleBookMediaService = async (req, res) => {
     const values = [
       req.body.customerEmail,
       req.body.description,
@@ -22,7 +22,7 @@ handleBookCateringService = async (req, res) => {
     ];
     // console.log(values);
     const sql =
-      "INSERT INTO catering (customerEmail,description,status) VALUES (?)";
+      "INSERT INTO media (customerEmail,description,status) VALUES (?)";
   
     connection.query(sql, [values], (err, data) => {
       if (err) return res.json(err);
@@ -34,7 +34,7 @@ handleBookCateringService = async (req, res) => {
     const cateringID  = req.params.cateringID ;
     console.log(cateringID );
     const newStatus = "done";
-    const updateQuery = "UPDATE catering SET status = ? WHERE cateringID = ?";
+    const updateQuery = "UPDATE media SET status = ? WHERE mediaID = ?";
     connection.query(updateQuery, [newStatus, cateringID ], (err, result) => {
       if (err) {
         console.error("Error updating status", err);
@@ -49,7 +49,7 @@ handleBookCateringService = async (req, res) => {
 
 
 module.exports = {
-    handleBookCateringService,
+    handleBookMediaService,
     handleUpdateStatus,
-    handleAllCatering,
+    handleAllMedia,
 }

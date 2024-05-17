@@ -4,7 +4,9 @@ const router = express.Router();
 const {
   handleAllBookings,
   handleBookEvent,
-  handleDeleteDataFromDb,
+  handleDeleteSoundSystemDataFromDb,
+  handleDeleteDecoratorDataFromDb,
+  handleDeleteCateringDataFromDb,
   handleGetUserByEmail,
 } = require("./../controllers/BookingController");
 
@@ -21,5 +23,7 @@ router
 handleGetUserByEmail
 );
 
-router.delete("/:bookingID", handleDeleteDataFromDb);
+router.delete("/sound-system/:bookingID", handleDeleteSoundSystemDataFromDb);
+router.delete("/decorator/:bookingID", handleDeleteDecoratorDataFromDb);
+router.delete("/catering/:bookingID", handleDeleteCateringDataFromDb);
 module.exports = router;
