@@ -117,6 +117,7 @@ handleMakeAdmin = (req, res) => {
     res.json({ message: "User role updated to admin" });
   });
 };
+
 handleMakeVendor = (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -158,4 +159,5 @@ module.exports = {
   handleRegisterUser,
   handleGetUserByEmail,
   handleGetUserRolesByEmail,
+  handleMakeVendor
 };

@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   handleAllBookings,
   handleBookEvent,
+  handleDeleteDataFromDb,
 } = require("./../controllers/BookingController");
 
 router
@@ -13,4 +14,6 @@ router
 .post("/",
   handleBookEvent
 );
+
+router.delete("/:bookingID", handleDeleteDataFromDb);
 module.exports = router;

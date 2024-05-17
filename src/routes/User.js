@@ -16,32 +16,33 @@ const {
 router
 .get("/", handleGetALlUsers);
 router
-.post("/", (req, res) => {
-  handleRegisterUser;
-});
+.post("/",
+  handleRegisterUser
+);
 
 router
   .route("/admin/:email")
   .get(handleCheckAdminByEmail)
   .delete(handleDeleteUser);
+
+
 router
 .route("/:id")
 .get(handleGetUserById)
-.delete(handleDeleteUser);
+.delete(handleDeleteUser)
+.put(handleMakeVendor);
 
 router
 .route("/email/:email")
 .get(handleGetUserByEmail);
-// router.route("/admin/:id").put(handleMakeAdmin);
 
 router
 .route("/role/:email")
 .get(handleGetUserRolesByEmail);
 
-router.put("/:id", (req, res) => {
-  handleMakeVendor;
-});
-router.put("/admin/:id", (req, res) => {
-  handleMakeAdmin;
-});
+// router.put("/:id", handleMakeVendor);
+
+
+
+router.put("/admin/:id", handleMakeAdmin);
 module.exports = router;

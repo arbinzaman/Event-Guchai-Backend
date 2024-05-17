@@ -31,7 +31,24 @@ handleBookEvent = async (req, res) => {
   });
 };
 
+
+
+handleDeleteDataFromDb = async (req, res) => {
+  const bookingID = req.params.bookingID; 
+  const sql = "UPDATE bookevent SET sound_system = NULL WHERE bookingID = ?";
+
+  connection.query(sql, [bookingID], (err, result) => {
+    if (err) {
+      console.error("Error deleting sound_system data:", err);
+      return res.status(500).json({ error: "Failed to delete sound_system data" });
+    }
+    return res.status(200).json({ message: "Sound_system data deleted successfully" });
+  });
+};
+
+
 module.exports = {
   handleAllBookings,
   handleBookEvent,
+  handleDeleteDataFromDb,
 };
