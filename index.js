@@ -9,6 +9,7 @@ const eventsRouter = require("./src/routes/Events");
 const soundSystemRouter = require("./src/routes/SoundSystem");
 const decorationRouter = require("./src/routes/Decoration");
 const cateringRoute = require("./src/routes/Catering");
+const mediaRoute = require("./src/routes/Media");
 
 app.use(
   cors({
@@ -23,6 +24,7 @@ app.use("/events", eventsRouter);
 app.use("/sound-system", soundSystemRouter);
 app.use("/decorator", decorationRouter);
 app.use("/catering", cateringRoute);
+app.use("/media", mediaRoute);
 
 async function main() {
   try {

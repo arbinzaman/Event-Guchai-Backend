@@ -7,6 +7,7 @@ const {
   handleDeleteSoundSystemDataFromDb,
   handleDeleteDecoratorDataFromDb,
   handleDeleteCateringDataFromDb,
+  handleDeleteMediaDataFromDb,
   handleGetUserByEmail,
 } = require("./../controllers/BookingController");
 
@@ -26,4 +27,5 @@ handleGetUserByEmail
 router.delete("/sound-system/:bookingID", handleDeleteSoundSystemDataFromDb);
 router.delete("/decorator/:bookingID", handleDeleteDecoratorDataFromDb);
 router.delete("/catering/:bookingID", handleDeleteCateringDataFromDb);
+router.delete("/media/:bookingID", handleDeleteMediaDataFromDb);
 module.exports = router;

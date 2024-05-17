@@ -61,6 +61,20 @@ handleDeleteCateringDataFromDb = async (req, res) => {
       .json({ message: "catering data deleted successfully" });
   });
 };
+handleDeleteMediaDataFromDb = async (req, res) => {
+  const bookingID = req.params.bookingID;
+  const sql = "UPDATE bookevent SET media = NULL WHERE bookingID = ?";
+
+  connection.query(sql, [bookingID], (err, result) => {
+    if (err) {
+      console.error("Error deleting Media data:", err);
+      return res.status(500).json({ error: "Failed to delete Media data" });
+    }
+    return res
+      .status(200)
+      .json({ message: "catering data deleted successfully" });
+  });
+};
 
 handleDeleteDecoratorDataFromDb = async (req, res) => {
   const bookingID = req.params.bookingID;
@@ -101,4 +115,5 @@ module.exports = {
   handleDeleteSoundSystemDataFromDb,
   handleDeleteDecoratorDataFromDb,
   handleDeleteCateringDataFromDb,
+  handleDeleteMediaDataFromDb,
 };

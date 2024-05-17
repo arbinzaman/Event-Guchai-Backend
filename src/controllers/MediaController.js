@@ -31,17 +31,17 @@ handleBookMediaService = async (req, res) => {
   };
 
   handleUpdateStatus = (req, res) => {
-    const cateringID  = req.params.cateringID ;
-    console.log(cateringID );
+    const mediaID  = req.params.mediaID ;
+    console.log(mediaID );
     const newStatus = "done";
     const updateQuery = "UPDATE media SET status = ? WHERE mediaID = ?";
-    connection.query(updateQuery, [newStatus, cateringID ], (err, result) => {
+    connection.query(updateQuery, [newStatus, mediaID ], (err, result) => {
       if (err) {
         console.error("Error updating status", err);
         res.status(500).json({ error: "Failed to update status" });
+        console.log("status updated successfully");
         return;
       }
-      console.log("status updated successfully");
       res.json({ message: "status updated failed" });
     });
   };
