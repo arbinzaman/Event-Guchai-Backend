@@ -20,7 +20,7 @@ app.use("/users", userRouter);
 app.use("/bookings", bookingsRouter);
 app.use("/events", eventsRouter);
 app.use("/sound-system", soundSystemRouter);
-app.use("/decoration", decorationRouter);
+app.use("/decorator", decorationRouter);
 
 async function main() {
   try {

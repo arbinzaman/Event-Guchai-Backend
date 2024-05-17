@@ -17,7 +17,7 @@ handleAllDecorations = async (req, res) => {
 handleBookDecoration = async (req, res) => {
     const values = [
       req.body.customerEmail,
-      req.body.quantity,
+      req.body.description,
       req.body.status,
     ];
     // console.log(values);
