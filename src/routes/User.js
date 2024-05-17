@@ -9,6 +9,8 @@ const {
   handleGetUserById,
   handleMakeVendor,
   handleMakeAdmin,
+  handleGetUserByEmail,
+  handleGetUserRolesByEmail,
 } = require("./../controllers/UserControllers");
 
 router
@@ -27,7 +29,14 @@ router
 .get(handleGetUserById)
 .delete(handleDeleteUser);
 
+router
+.route("/email/:email")
+.get(handleGetUserByEmail);
 // router.route("/admin/:id").put(handleMakeAdmin);
+
+router
+.route("/role/:email")
+.get(handleGetUserRolesByEmail);
 
 router.put("/:id", (req, res) => {
   handleMakeVendor;

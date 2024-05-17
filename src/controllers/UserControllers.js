@@ -23,6 +23,41 @@ handleGetUserById = async (req, res) => {
     }
   );
 };
+handleGetUserByEmail = async (req, res) => {
+  const email = req.params.email;
+  // console.log(email);
+  connection.query(
+    "SELECT * FROM users WHERE email = ?",
+    email,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results);
+    }
+  );
+};
+
+handleGetUserRolesByEmail = async (req, res) => {
+  const email = req.params.email;
+  connection.query(
+    "SELECT role, vendorRole FROM users WHERE email = ?",
+    [email],
+    (error, results) => {
+      if (error) {
+        console.error("Error fetching user roles: ", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      if (results.length === 0) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      res.status(200).json(results); // Return the results as an array of objects
+    }
+  );
+};
+
+
+
 
 handleCheckAdminByEmail = async (req, res) => {
   try {
@@ -121,4 +156,6 @@ module.exports = {
   handleMakeAdmin,
   handleDeleteUser,
   handleRegisterUser,
+  handleGetUserByEmail,
+  handleGetUserRolesByEmail,
 };
