@@ -8,6 +8,7 @@ const bookingsRouter = require("./src/routes/Booking");
 const eventsRouter = require("./src/routes/Events");
 const soundSystemRouter = require("./src/routes/SoundSystem");
 const decorationRouter = require("./src/routes/Decoration");
+const cateringRoute = require("./src/routes/Catering");
 
 app.use(
   cors({
@@ -21,6 +22,7 @@ app.use("/bookings", bookingsRouter);
 app.use("/events", eventsRouter);
 app.use("/sound-system", soundSystemRouter);
 app.use("/decorator", decorationRouter);
+app.use("/catering", cateringRoute);
 
 async function main() {
   try {
