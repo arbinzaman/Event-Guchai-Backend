@@ -47,8 +47,24 @@ handleDeleteDataFromDb = async (req, res) => {
 };
 
 
+handleGetUserByEmail = async (req, res) => {
+  const email = req.params.email;
+  // console.log(email);
+  connection.query(
+    "SELECT * FROM bookevent WHERE customerEmail = ?",
+    email,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results);
+    }
+  );
+};
+
 module.exports = {
   handleAllBookings,
   handleBookEvent,
   handleDeleteDataFromDb,
+  handleGetUserByEmail,
 };

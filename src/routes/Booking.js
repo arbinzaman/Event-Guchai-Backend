@@ -5,6 +5,7 @@ const {
   handleAllBookings,
   handleBookEvent,
   handleDeleteDataFromDb,
+  handleGetUserByEmail,
 } = require("./../controllers/BookingController");
 
 router
@@ -13,6 +14,11 @@ router
 router
 .post("/",
   handleBookEvent
+);
+
+router
+.get("/:email", 
+handleGetUserByEmail
 );
 
 router.delete("/:bookingID", handleDeleteDataFromDb);
