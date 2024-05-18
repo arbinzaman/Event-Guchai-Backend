@@ -1,18 +1,18 @@
 {
     "builds": [
       {
-        "src": "index.js",
+        "src": "src/index.js",
         "use": "@now/node-server"
       }
     ],
     "routes": [
       {
-        "src": "/src/routes/(.*)",
-        "dest": "index.js"
+        "src": "/api/(.*)",
+        "dest": "src/index.js"
       },
       {
         "src": "/(.*)",
-        "dest": "index.js"
+        "dest": "src/index.js"
       }
     ]
   }
