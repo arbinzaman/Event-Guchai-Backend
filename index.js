@@ -10,6 +10,7 @@ const soundSystemRouter = require("./src/routes/SoundSystem");
 const decorationRouter = require("./src/routes/Decoration");
 const cateringRoute = require("./src/routes/Catering");
 const mediaRoute = require("./src/routes/Media");
+const customPackageRoute = require("./src/routes/CustomPackage");
 
 app.use(
   cors({
@@ -25,6 +26,7 @@ app.use("/sound-system", soundSystemRouter);
 app.use("/decorator", decorationRouter);
 app.use("/catering", cateringRoute);
 app.use("/media", mediaRoute);
+app.use("/custom-package", customPackageRoute);
 
 async function main() {
   try {
