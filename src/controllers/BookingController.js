@@ -108,6 +108,27 @@ handleGetUserByEmail = async (req, res) => {
   );
 };
 
+
+handleDeleteBookingByID = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  connection.query(
+    "DELETE FROM bookevent WHERE bookingID = ?",
+    id,
+    (error, results) => {
+      if (error) {
+        console.error("Error deleting from the database: " + error);
+        res.status(500).json({ error: "Error deleting data" });
+      } else {
+        res.json({ message: "booking cancelled successful" });
+      }
+    }
+  );
+};
+
+
+
+
 module.exports = {
   handleAllBookings,
   handleBookEvent,
@@ -116,4 +137,5 @@ module.exports = {
   handleDeleteDecoratorDataFromDb,
   handleDeleteCateringDataFromDb,
   handleDeleteMediaDataFromDb,
+  handleDeleteBookingByID,
 };

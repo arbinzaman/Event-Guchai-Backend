@@ -9,20 +9,20 @@ const {
   handleDeleteCateringDataFromDb,
   handleDeleteMediaDataFromDb,
   handleGetUserByEmail,
+  handleDeleteBookingByID,
 } = require("./../controllers/BookingController");
 
-router
-.get("/", handleAllBookings);
+router.get("/", handleAllBookings);
+
+router.post("/", handleBookEvent);
 
 router
-.post("/",
-  handleBookEvent
-);
+  .route("/:email")
+  .get(handleGetUserByEmail)
 
-router
-.get("/:email", 
-handleGetUserByEmail
-);
+  router
+  .route("/:id")
+  .delete(handleDeleteBookingByID);
 
 router.delete("/sound-system/:bookingID", handleDeleteSoundSystemDataFromDb);
 router.delete("/decorator/:bookingID", handleDeleteDecoratorDataFromDb);
