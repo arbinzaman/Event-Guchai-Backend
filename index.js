@@ -14,7 +14,7 @@ const customPackageRoute = require("./src/routes/CustomPackage");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://event-guchai.vercel.app"],
+    origin: ["https://event-guchai.vercel.app"],
   })
 );
 
