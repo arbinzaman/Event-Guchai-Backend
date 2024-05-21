@@ -1,6 +1,3 @@
-Certainly! Here's a README file specifically tailored for the backend of your multivendor event management system:
-
----
 
 # Eventগুছাই Backend
 
