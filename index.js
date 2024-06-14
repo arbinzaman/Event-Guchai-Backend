@@ -14,7 +14,7 @@ const customPackageRoute = require("./src/routes/CustomPackage");
 
 app.use(
   cors({
-    origin: ["https://event-guchai.vercel.app"],
+    origin: "*",
   })
 );
 
